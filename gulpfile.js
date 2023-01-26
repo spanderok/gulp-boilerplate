@@ -16,27 +16,27 @@ const plumber = require('gulp-plumber');
 
 const paths = {
   html: {
-    src: './app/**/*.html',
+    src: './src/**/*.html',
     dest: './build'
   },
   styles: {
-    src: './app/scss/**/*.scss',
+    src: './src/scss/**/*.scss',
     dest: './build/assets/css'
   },
   scripts: {
-    src: './app/js/**/*.js',
+    src: './src/js/**/*.js',
     dest: './build/assets/js'
   },
   vendors: {
-    src: './app/js/vendors/**/*.js',
+    src: './src/js/vendors/**/*.js',
     dest: './build/assets/js'
   },
   images: {
-    src: './app/images/**/*',
+    src: './src/assets/images/**/*',
     dest: './build/assets/images'
   },
   favicon: {
-    src: './app/favicon.ico',
+    src: './src/favicon.ico',
     dest: './build'
   }
 };
@@ -122,7 +122,6 @@ const images = () =>
 const favicon = () =>
   gulp
     .src(paths.favicon.src)
-    .pipe(plumber())
     .pipe(gulp.dest(paths.favicon.dest));
 
 // Watches all .scss, .js and .html changes and executes the corresponding task
@@ -139,7 +138,7 @@ function watchFiles() {
   gulp.watch(paths.favicon.src, favicon).on('change', browserSync.reload);
   gulp.watch(paths.scripts.src, scripts).on('change', browserSync.reload);
   gulp.watch(paths.images.src, images).on('change', browserSync.reload);
-  gulp.watch('./app/*.html', html).on('change', browserSync.reload);
+  gulp.watch('./src/*.html', html).on('change', browserSync.reload);
 }
 
 const build = gulp.series(
